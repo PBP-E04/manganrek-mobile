@@ -51,3 +51,12 @@ Admin atau kontributor dapat menambahkan promo atau diskon baru ke restoran, pen
 - Meninjau dan menyetujui restoran yang ditambahkan oleh kontributor.
 - Mengedit dan menghapus restoran yang tidak memenuhi kriteria atau telah tutup.
 - Menambahkan, memperbarui, dan menghapus promo dan diskon.
+
+## vi. Alur Pengintegrasian dengan _Web Service_
+
+1. Menambahkan middleware pada aplikasi Django agar endpoint dapat diakses dari luar website. 
+2. Menambahkan package `pbp_django_auth` untuk mengelola _cookie_. 
+3. Menambahkan package `http` pada Flutter untuk memungkinkan interaksi dengan aplikasi web melalui HTTP request.
+4. Memanfaatkan model autentikasi yang telah dibuat untuk memberikan otorisasi kepada pengguna sesuai peran mereka.
+5. Menggunakan **Quicktype** untuk mengonversi data JSON dari _endpoint_ menjadi objek Dart.
+6. Melengkapi _endpoint_ pada aplikasi web untuk setiap modul untuk pengambilan data (**GET**) dan pengiriman data (**POST**).
