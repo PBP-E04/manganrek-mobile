@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:manganrek_mobile/restoran_makanan/screens/homepage.dart';
+import 'package:manganrek_mobile/restoran_makanan/screens/rumah_makan_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.lightGreen,
           ).copyWith(secondary: Colors.lightGreen[400]),
         ),
-        home: MyHomePage(),
+        home: RumahMakanPage(),
       ),
     );
   }
