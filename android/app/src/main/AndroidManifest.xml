@@ -32,6 +32,10 @@
             android:value="2" />
     </application>
     <!-- Required to fetch data from the Internet. -->
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> 343c577 (fixed conflict)
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
