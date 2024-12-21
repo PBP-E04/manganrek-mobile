@@ -4,6 +4,7 @@ import 'package:manganrek_mobile/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:manganrek_mobile/rating_ulasan/screens/reviewform.dart';
+import 'package:manganrek_mobile/rating_ulasan/screens/reviewedit.dart';
 
 class ReviewEntryPage extends StatefulWidget {
   const ReviewEntryPage({super.key});
@@ -16,7 +17,7 @@ class _ReviewEntryPageState extends State<ReviewEntryPage> {
   late Future<List<Review>> futureReviews;
   late Future<List<Map<String, dynamic>>> usersFuture;
   late Map<int, String> usernameMap;
-  List<dynamic>? rumahMakanList;
+  late List<dynamic> rumahMakanList;
   final TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
 
@@ -133,6 +134,18 @@ class _ReviewEntryPageState extends State<ReviewEntryPage> {
         ),
       ),
     );
+  }
+
+  Future<void> deleteReview(CookieRequest request, int reviewId) async {
+    try {
+      final response = await request.post(
+          'http://127.0.0.1:8000/review/delete-flutter/$reviewId/', null);
+      if (response['success'] != true) {
+        throw Exception('Failed to delete review');
+      }
+    } catch (e) {
+      throw Exception('Error deleting review: $e');
+    }
   }
 
   Widget _buildEmptyState() {
@@ -280,7 +293,21 @@ class _ReviewEntryPageState extends State<ReviewEntryPage> {
                             icon: const Icon(Icons.edit, size: 20),
                             color: Theme.of(context).primaryColor,
                             onPressed: () {
-                              // Edit functionality
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ReviewEditPage(
+                                    review: review,
+                                    rumahMakanList: rumahMakanList,
+                                  ),
+                                ),
+                              ).then((updated) {
+                                if (updated == true) {
+                                  setState(() {
+                                    futureReviews = fetchReviews(request);
+                                  });
+                                }
+                              });
                             },
                           ),
                           IconButton(
@@ -302,8 +329,20 @@ class _ReviewEntryPageState extends State<ReviewEntryPage> {
                                     TextButton(
                                       child: const Text('Delete',
                                           style: TextStyle(color: Colors.red)),
-                                      onPressed: () {
-                                        // Delete functionality
+                                      onPressed: () async {
+                                        await deleteReview(request, review.pk);
+                                        // Remove the review locally
+                                        setState(() {
+                                          futureReviews = fetchReviews(request);
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                'Review deleted successfully!'),
+                                            backgroundColor: Colors.green,
+                                          ),
+                                        );
                                         Navigator.pop(context);
                                       },
                                     ),
