@@ -25,10 +25,9 @@ class _RumahMakanPageState extends State<RumahMakanPage> {
   final TextEditingController _maxSpicyController = TextEditingController();
 
   Future<List<RumahMakan>> fetchRumahMakan(CookieRequest request) async {
-    final response = await request.get(
-        'https://anders-willard-manganrek.pbp.cs.ui.ac.id/restoran-makanan/json-rumahmakan/');
+    final response = await request.get('https://anders-willard-manganrek.pbp.cs.ui.ac.id/restoran-makanan/json-rumahmakan/');
     var data = response;
-
+    
     // Melakukan konversi data json menjadi object RumahMakan
     List<RumahMakan> listRumahMakan = [];
     for (var d in data) {
@@ -40,10 +39,9 @@ class _RumahMakanPageState extends State<RumahMakanPage> {
   }
 
   Future<List<Makanan>> fetchMakanan(CookieRequest request) async {
-    final response = await request.get(
-        'https://anders-willard-manganrek.pbp.cs.ui.ac.id/restoran-makanan/json-menu/');
+    final response = await request.get('https://anders-willard-manganrek.pbp.cs.ui.ac.id/restoran-makanan/json-menu/');
     var data = response;
-
+    
     // Melakukan konversi data json menjadi object Makanan
     List<Makanan> listMakanan = [];
     for (var d in data) {
@@ -335,9 +333,7 @@ class _RumahMakanPageState extends State<RumahMakanPage> {
           // Filter the list based on search query
           final filteredList = snapshot.data!.where((makanan) {
             final searchQuery = _searchController.text.toLowerCase();
-            return makanan.fields.namaMakanan
-                .toLowerCase()
-                .contains(searchQuery);
+            return makanan.fields.namaMakanan.toLowerCase().contains(searchQuery);
           }).toList();
 
           return ListView.builder(

@@ -1,5 +1,4 @@
 import 'package:manganrek_mobile/main.dart';
-import 'package:manganrek_mobile/screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, unnecessary_null_comparison, use_build_context_synchronously, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:manganrek_mobile/rating_ulasan/models/review.dart';
 import 'package:manganrek_mobile/widgets/left_drawer.dart';
@@ -89,7 +91,7 @@ class _ReviewEntryPageState extends State<ReviewEntryPage> {
 
   String? getRestaurantNameByPk(String pk) {
     if (rumahMakanList == null) return null;
-    for (var restaurant in rumahMakanList!) {
+    for (var restaurant in rumahMakanList) {
       if (restaurant['pk'] == pk) {
         return restaurant['fields']['nama'];
       }
